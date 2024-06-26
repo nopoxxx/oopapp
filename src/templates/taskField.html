@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <div class="task-column" id="ready-tasks">
+      <div class="task-column" id="ready-tasks" data-status="ready">
         <h2 id="readyBlock">Ready</h2>
         <ul class="tasks" id="tasks_ready"></ul>
         <button class="add-btn" id="ready__add-btn">+ Add card</button>
@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="task-column" id="in-progress-tasks">
+      <div class="task-column" id="in-progress-tasks" data-status="in_progress">
         <h2 id="inProcessBlock">In Progress</h2>
         <ul class="tasks" id="tasks_in_progress"></ul>
         <div class="dropdown">
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="task-column" id="finished-tasks">
+      <div class="task-column" id="finished-tasks" data-status="finished">
         <h2 id="finishedBlock">Finished</h2>
         <ul class="tasks" id="tasks_finished"></ul>
         <div class="dropdown">

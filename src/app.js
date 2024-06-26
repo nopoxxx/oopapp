@@ -298,6 +298,49 @@ function checkInProgressTasks(user) {
   addBtn.disabled = inProgressTasks.length === 0;
 }
 
+function addDragAndDropHandlers() {
+  document.querySelectorAll(".task-item").forEach((item) => {
+    item.setAttribute("draggable", true);
+    item.addEventListener("dragstart", onDragStart);
+  });
+
+  document.querySelectorAll(".task-column").forEach((column) => {
+    column.addEventListener("dragover", onDragOver);
+    column.addEventListener("drop", onDrop);
+  });
+}
+
+function onDragStart(event) {
+  event.dataTransfer.setData("text/plain", event.target.id);
+}
+
+function onDragOver(event) {
+  event.preventDefault();
+}
+
+function onDrop(event) {
+  event.preventDefault();
+  const id = event.dataTransfer.getData("text/plain");
+  const draggableElement = document.getElementById(id);
+  const dropzone = event.target.closest(".task-column");
+
+  if (dropzone) {
+    dropzone.querySelector(".tasks").appendChild(draggableElement);
+    const newStatus = dropzone.dataset.status;
+    updateTaskStatus(id, newStatus);
+  }
+}
+
+function updateTaskStatus(taskId, newStatus) {
+  const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  const taskIndex = tasks.findIndex((task) => task.id.toString() === taskId);
+  if (taskIndex !== -1) {
+    tasks[taskIndex].status = newStatus;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+  displayTasks(appState.currentUser.id);
+}
+
 function displayTasks(user) {
   checkReadyTasks(user);
   checkInProgressTasks(user);
@@ -317,6 +360,8 @@ function displayTasks(user) {
       const taskItem = document.createElement("li");
       taskItem.classList.add("task-item");
       taskItem.textContent = task.description;
+      taskItem.id = task.id;
+
       switch (task.status) {
         case "ready":
           ++activeCount;
@@ -344,4 +389,6 @@ function displayTasks(user) {
 
   checkReadyTasks(user);
   checkInProgressTasks(user);
+
+  addDragAndDropHandlers();
 }
