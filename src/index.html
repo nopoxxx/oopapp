@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple TODO App</title>
+  </head>
+
+  <body class="body">
+    <nav class="navbar navbar-expand-lg navbar-dark nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">SimpleTODO</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+          </ul>
+          <div class="dropdown" id="user-dropdown">
+            <img id="user-dropdown-btn" src="./img/user.svg" alt="user" />
+
+            <div id="user-dropdown-content" class="dropdown-content hide">
+              <button id="user-dropdown__sign-in" class="dropdown-item">
+                Sign In
+              </button>
+              <button id="user-dropdown__sign-up" class="dropdown-item">
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <p id="content">Please Sign In to see your tasks!</p>
+    </div>
+    <footer class="footer">
+      <div class="tasks-counter">
+        <h5 class="footer-element">
+          Active tasks: <span id="active-tasks-count">0</span>
+        </h5>
+        <h5 class="footer-element">
+          Finished tasks: <span id="finished-tasks-count">0</span>
+        </h5>
+      </div>
+      <h5 class="footer-element">ToDoList by nopox 2024</h5>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="../styles/style.css" />
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="task-column" id="ready-tasks">
+        <h2 id="readyBlock">Ready</h2>
+        <ul class="tasks" id="tasks_ready"></ul>
+        <button class="add-btn" id="ready__add-btn">+ Add card</button>
+        <button class="sub-btn hide" id="ready__submit-btn">Submit</button>
+
+        <p class="error hide" id="ready__error">Task can't be empty</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="task-column" id="in-progress-tasks">
+        <h2 id="inProcessBlock">In Progress</h2>
+        <ul class="tasks" id="tasks_in_progress"></ul>
+        <div class="dropdown">
+          <button class="add-btn" id="in_progress__add-btn">+ Add card</button>
+          <button class="add-btn hide" id="in_progress__fake-btn">
+            + Add card
+          </button>
+          <div id="in_progress__dropdown" class="dropdown-content hide"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="task-column" id="finished-tasks">
+        <h2 id="finishedBlock">Finished</h2>
+        <ul class="tasks" id="tasks_finished"></ul>
+        <div class="dropdown">
+          <button class="add-btn" id="finished__add-btn">+ Add card</button>
+          <button class="add-btn hide" id="finished__fake-btn">
+            + Add card
+          </button>
+          <div id="finished__dropdown" class="dropdown-content hide"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
