@@ -12,7 +12,11 @@ export const authUser = function (login, password) {
     return false;
   }
 
-  const authenticatedUser = new User(existingUser.login, existingUser.password);
+  const authenticatedUser = new User(
+    existingUser.login,
+    existingUser.password,
+    existingUser.isAdmin
+  );
   authenticatedUser._id = existingUser._id;
   appState.currentUser = authenticatedUser;
 

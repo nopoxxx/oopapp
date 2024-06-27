@@ -3,6 +3,7 @@ import { User } from "./models/User";
 import { authUser } from "./services/auth";
 import { State } from "./state";
 import "./styles/style.css";
+import adminTemplate from "./templates/adminPanel.html";
 import noAccessTemplate from "./templates/noAccess.html";
 import signInTemplate from "./templates/signIn.html";
 import signUpTemplate from "./templates/signUp.html";
@@ -30,6 +31,11 @@ userDropdown.addEventListener("click", function () {
       document.querySelector("#user-dropdown-content").classList.add("hide");
     }
   };
+  if (appState.currentUser && appState.currentUser.isAdmin) {
+    document.querySelector("#user-dropdown__admin").classList.remove("hide");
+  } else {
+    document.querySelector("#user-dropdown__admin").classList.add("hide");
+  }
 });
 
 document
@@ -71,8 +77,11 @@ document
       const formData = new FormData(loginForm);
       const login = formData.get("login");
       const password = formData.get("password");
+      const isAdmin = document.querySelector("#checkbox").checked
+        ? true
+        : false;
 
-      const newUser = new User(login, password);
+      const newUser = new User(login, password, isAdmin);
       User.save(newUser);
 
       let fieldHTMLContent = authUser(login, password)
@@ -90,6 +99,21 @@ document
         displayTasks(currentUser.id);
       }
     });
+  });
+
+document
+  .querySelector("#user-dropdown__admin")
+  .addEventListener("click", function () {
+    if (appState.currentUser) {
+      console.log(appState.currentUser);
+      document.querySelector("#content").innerHTML = appState.currentUser
+        .isAdmin
+        ? adminTemplate
+        : noAccessTemplate;
+      reloadUsersList();
+    } else {
+      document.querySelector("#content").innerHTML = noAccessTemplate;
+    }
   });
 
 function readyTaskListener(user) {
@@ -391,4 +415,34 @@ function displayTasks(user) {
   checkInProgressTasks(user);
 
   addDragAndDropHandlers();
+}
+
+function deleteUserAndTasks(userId) {
+  let users = getFromStorage("users");
+  let tasks = getFromStorage("tasks");
+
+  users = users.filter((user) => user._id !== userId);
+  tasks = tasks.filter((task) => task.owner !== userId);
+
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  reloadUsersList();
+}
+
+function reloadUsersList() {
+  const usersListDiv = document.querySelector("div.users-list");
+
+  usersListDiv.innerHTML = "";
+
+  const users = getFromStorage("users");
+  users.forEach((user) => {
+    const userButton = document.createElement("button");
+    userButton.textContent = user.login;
+    userButton.classList.add("delete-user-btn");
+    userButton.addEventListener("click", () => {
+      deleteUserAndTasks(user._id);
+    });
+    usersListDiv.appendChild(userButton);
+  });
 }
