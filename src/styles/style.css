@@ -15,7 +15,7 @@
 
 .users-list {
   min-height: 300px;
-  padding: 10px;
+  padding: 0;
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #ebecf0;
@@ -24,7 +24,7 @@
 }
 
 .delete-user-btn {
-  margin: 10px;
+  margin: 3px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -38,6 +38,40 @@
   border-radius: 10px;
   background-color: #ff7373;
   color: #fff;
+}
+
+.add-new-user {
+  padding: 0;
+  display: flex;
+}
+
+.add-new-user-btn {
+  width: 600px;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #ebecf0;
+}
+
+.add-new-user-btn:hover {
+  width: 600px;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #83ee9a;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  outline: none;
+  color: #333;
+  font-size: 18px;
+  border-radius: 10px;
 }
 
 .footer {

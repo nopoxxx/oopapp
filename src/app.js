@@ -110,7 +110,20 @@ document
         .isAdmin
         ? adminTemplate
         : noAccessTemplate;
-      reloadUsersList();
+
+      const addNewUser = document.querySelector(".add-new-user");
+
+      addNewUser.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(addNewUser);
+        const login = formData.get("login");
+        const password = formData.get("password");
+
+        const newUser = new User(login, password, false);
+        User.save(newUser);
+        reloadAdminPanel();
+      });
+      reloadAdminPanel();
     } else {
       document.querySelector("#content").innerHTML = noAccessTemplate;
     }
@@ -427,11 +440,15 @@ function deleteUserAndTasks(userId) {
   localStorage.setItem("users", JSON.stringify(users));
   localStorage.setItem("tasks", JSON.stringify(tasks));
 
-  reloadUsersList();
+  reloadAdminPanel();
 }
 
-function reloadUsersList() {
+function reloadAdminPanel() {
   const usersListDiv = document.querySelector("div.users-list");
+
+  const addNewUser = document.querySelector(".add-new-user");
+
+  addNewUser.reset();
 
   usersListDiv.innerHTML = "";
 
