@@ -437,12 +437,14 @@ function reloadUsersList() {
 
   const users = getFromStorage("users");
   users.forEach((user) => {
-    const userButton = document.createElement("button");
-    userButton.textContent = user.login;
-    userButton.classList.add("delete-user-btn");
-    userButton.addEventListener("click", () => {
-      deleteUserAndTasks(user._id);
-    });
-    usersListDiv.appendChild(userButton);
+    if (user._id !== appState.currentUser.id) {
+      const userButton = document.createElement("button");
+      userButton.textContent = user.login;
+      userButton.classList.add("delete-user-btn");
+      userButton.addEventListener("click", () => {
+        deleteUserAndTasks(user._id);
+      });
+      usersListDiv.appendChild(userButton);
+    }
   });
 }
